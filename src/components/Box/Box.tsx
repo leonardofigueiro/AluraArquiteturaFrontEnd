@@ -1,22 +1,17 @@
+import { BaseComponent } from "@src/theme/BaseComponent";
+import { StyleSheet } from "@src/theme/StyleSheet";
 import React from 'react';
-import styled from 'styled-components';
-import StyleSheet from '@/theme/StyleSheet';
-import { BaseComponent } from '@/theme/BaseComponent';
-
-
-
 
 interface BoxProps {
-  tag?: string;
+  tag?: 'main' | 'div' | 'article' | 'section' | 'ul' | string;
   children?: React.ReactNode;
-  styleSheet?: StyleSheet
+  styleSheet?: StyleSheet;
 }
-
-export default function Box({styleSheet, children, tag, ...props}: BoxProps) {
-  const Tag = tag || 'div'
-  return(
+export default function Box({ styleSheet, children, tag, ...props }: BoxProps) {
+  const Tag = tag || 'div';
+  return (
     <BaseComponent as={Tag} styleSheet={styleSheet} {...props}>
       {children}
     </BaseComponent>
-  )
+  );
 }

@@ -1,34 +1,39 @@
-import Box from "@/components/Box/Box";
+import Box from "@src/components/Box/Box";
+import Link from "@src/components/Link/Link";
+import Text from "@src/components/Text/Text";
+import { useTheme } from "@src/theme/ThemeProvider";
 import Background from "./patterns/Background/Background";
-import Menu from "./patterns/Menu/Menu";
-import Text from "@/components/Text/Text";
 import Feed from "./patterns/Feed/Feed";
 import Footer from "./patterns/Footer/Footer";
-import { useTheme } from "@/theme/ThemeProvider";
-import Link from '@/components/Link/Link';
-
+import Menu from "./patterns/Menu/Menu";
 
 export default function HomeScreen() {
   const theme = useTheme();
+
   return (
     <Box
       tag="main"
       styleSheet={{
-        flex: '1'
+        backgroundColor: theme.colors.neutral.x000,
+        flex: 1,
+        alignItems: 'center',
       }}
     >
-      <Link href="/sobre">Vá para Sobre</Link>
-      <Link href="http://google.com">Vá para o Google</Link>
       <Background />
       <Menu />
       <Feed>
-        <Feed.Header/>
-        <Text variant="heading1"  tag="h1">
+        <Feed.Header />
+      </Feed>
+      <Footer />
+      {/* 
+      <Feed>
+        <Feed.Header />
+        <Text tag="h2" variant="heading1">
           Últimas Atualizações
         </Text>
-        <Feed.Posts/>
+        <Feed.Posts />
       </Feed>
-      <Footer/>
+       */}
     </Box>
-  );
+  )
 }

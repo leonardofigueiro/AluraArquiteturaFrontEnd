@@ -1,10 +1,12 @@
-import Link from "@/components/Link/Link";
+import Link from "@src/components/Link/Link";
 
-export default function AboutScreen () {
-  return (<div>
-    Sobre!
-    <Link href="/">
-      Voltar para Home
-    </Link>
-  </div>)
+export default function AboutScreen() {
+  return (
+    <div>
+      Sobre!
+      <Link href="/">
+        Voltar para home
+      </Link>
+    </div>
+  )
 }

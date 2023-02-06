@@ -1,22 +1,30 @@
-import React from "react";
-import * as NextLink from "next/link";
+import React from 'react';
+import NextLink from 'next/link';
 import Text from "../Text/Text";
-import StyleSheet from "@/theme/StyleSheet";
-import { ThemeTypographyVariants } from "@/theme/theme";
-import { useTheme } from "@/theme/ThemeProvider";
+import { StyleSheet } from "@src/theme/StyleSheet";
+import { ThemeTypographyVariants } from "@src/theme/theme";
+import { useTheme } from "@src/theme/ThemeProvider";
+
 
 interface LinkProps {
-    href: string;
-    children: React.ReactNode;
-    styleSheet?: StyleSheet;
-    variant?: ThemeTypographyVariants;
-    colorVariant: 'primary' | 'accent' | 'neutral' | 'success' | 'warning' | 'error';
-
+  href: string;
+  children: React.ReactNode;
+  styleSheet?: StyleSheet;
+  variant?: ThemeTypographyVariants;
+  colorVariant?: 'primary' | 'accent' | 'neutral' | 'success' | 'warning' | 'negative';
+  colorVariantEnabled?: boolean;
 }
 
-export default function Link ({ href, children, colorVariant, styleSheet, variant, ...props }: LinkProps) {
-
+const Link = React.forwardRef(({
+  href,
+  children,
+  colorVariant,
+  styleSheet,
+  colorVariantEnabled,
+  ...props
+}:LinkProps, ref) => {
   const theme = useTheme();
+  const isIExternalLink = href.startsWith('http');
 
   const currentColorSet = {
     color: theme.colors[colorVariant].x500,
@@ -24,28 +32,56 @@ export default function Link ({ href, children, colorVariant, styleSheet, varian
       color: theme.colors[colorVariant].x400,
     },
     focus: {
-      color: theme.colors[colorVariant].x600
+      color: theme.colors[colorVariant].x600,
     }
-  }
+  };
 
   const linkProps = {
-    href,
+    tag: 'a',
+    ref,
     children,
+    href,
     styleSheet: {
       textDecoration: 'none',
-      color: currentColorSet.color,
+      ...colorVariantEnabled && {
+        color: currentColorSet.color,
+      },
       ...styleSheet,
+      hover: {
+        ...styleSheet?.hover,
+        ...colorVariantEnabled && {
+          color: currentColorSet.focus.color,
+        }
+      },
+      focus: {
+        ...styleSheet?.focus,
+        ...colorVariantEnabled && {
+          color: currentColorSet.focus.color,
+        }
+      },
     },
     ...props
   }
-  console.log(linkProps)
-    return (
-      <NextLink.default href={href} style={{textDecoration: 'none'}} {...props}>
-        <Text {...linkProps}>{children}</Text>
-      </NextLink.default>
-    )
-}
+
+  if(isIExternalLink) return (
+    <Text 
+      {...{
+        target: '_blank',
+        ...linkProps,
+      }}
+    />
+  )
+
+  return (
+    <NextLink href={href} passHref>
+      <Text {...linkProps} />
+    </NextLink>
+  )
+});
 
 Link.defaultProps = {
-  colorVariant: 'primary'
-}
+  colorVariant: 'primary',
+  colorVariantEnabled: true,
+};
+
+export default Link;

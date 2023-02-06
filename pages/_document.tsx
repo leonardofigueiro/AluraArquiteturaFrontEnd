@@ -1,4 +1,4 @@
-import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
+import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
@@ -22,7 +22,8 @@ export default class MyDocument extends Document {
       sheet.seal()
     }
   }
-  render(): JSX.Element {
+
+  render() {
     return (
       <Html>
         <Head>
@@ -31,10 +32,10 @@ export default class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
         </Head>
         <body>
-          <Main/>
-          <NextScript/>
+          <Main />
+          <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

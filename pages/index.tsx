@@ -1,19 +1,17 @@
-export { default } from '@/screens/HomeScreen/HomeScreen';
+export { default } from '@src/screens/HomeScreen/HomeScreen';
 
-
-// import Box from "@/components/Box";
-// import theme from "@/theme/theme";
-
+// import Box from "@src/components/Box";
+// import theme from "@src/theme/theme";
 // export default function HomeScreen() {
 //   return (
 //     <Box
-//       tag='main'
+//       tag="main"
 //       styleSheet={{
 //         fontFamily: theme.typography.fontFamily,
 //         backgroundColor: {
 //           xs: 'red',
+//           sm: 'yellow',
 //           md: 'blue',
-//           sm: 'yellow'
 //         }
 //       }}
 //     >
